@@ -1,0 +1,66 @@
+<head>
+<link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/main.css'}" />
+</head>
+
+<body>
+<div id=wrapper>
+	<div id=userBox>
+		<div id=displayEvents>
+			#{if isConnected}
+				<h2>Your ${cal.name} Calendar</h2>
+			#{/if}
+			#{else}
+				<h2>${user.name}'s ${cal.name} Calendar</h2>
+			#{/else}
+			#{list events, as:'event'}
+				<li>
+				${event.name} </br> FROM: ${event.startDate.format('dd.MM.yy HH:mm')} TO: ${event.endDate.format('dd.MM.yy HH:mm')}
+				</li>
+				<br/>
+			#{/list}
+		</div>
+		
+		#{if isConnected}
+			<div id=createEvents>
+			<h2>Create a new Event</h2>
+			#{form @Application.createEvent()}
+				<p>
+		    		<input type="hidden" name="calendarName" value="${cal.name}" />
+		    	</p>
+				<p>
+					<label for="eventName">Event Name: </label> <br/>
+					<input type="text" name="eventName"/>
+				</p>
+				<p>
+					<label for="startDate">Start Date (dd.MM.yy HH:mm): </label> <br/>
+					<input type="text" name="startDate"/>
+				</p>
+				<p>
+					<label for="endDate">End Date (dd.MM.yy HH:mm): </label> <br/>
+					<input type="text" name="endDate"/>
+				</p>
+				<p>
+					<input type="checkbox" name="isPublic"/>
+					<label for="isPublic">Make public</label>
+				</p>
+				<p>
+					<input type="submit" value="create Event">
+				</p>
+			#{/form}
+			</div>
+		#{/if}
+	</div>
+	
+	<div id=back>
+	#{if isConnected}
+	 	<a href="@{Application.index()}"><<</a>
+	#{/if}
+	#{else}
+		<a href="@{Application.displayCalendars(user.name)}"><<</a>
+	#{/else}
+	</div>
+	<div id=logout>
+	<a href="@{Secure.logout()}">logout</a>
+	</div>
+</div>
+</body>

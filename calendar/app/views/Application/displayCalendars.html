@@ -1,0 +1,26 @@
+<head>
+<link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/main.css'}" />
+</head>
+
+<body>
+<div id=wrapper>
+	<div id=userBox>
+		<div id=displayCalendars>
+		<h2>${user.name}'s Calendars </h2>
+		#{list cals, as:'cal'}
+			<li>
+			<a href="@{Application.displayEvents(user.name, cal.name)}">${cal.name} Calendar</a>
+			</li>
+		#{/list}
+		</div>
+	</div>
+	
+	<div id=back>
+	<a href="@{Application.index}"><<</a>
+	</div>
+	
+	<div id=logout>
+	<a href="@{Secure.logout()}">logout</a>
+	</div>
+</div>
+</body>
