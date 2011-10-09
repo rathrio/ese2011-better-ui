@@ -77,4 +77,12 @@ public class Event implements Comparable<Event> {
 	public String toString() {
 		return this.name;
 	}
+
+	public void set(String newEventname, String startDate, String endDate,
+			boolean isPublic) {
+		this.name = newEventname;
+		this.startDate = Parser.parseStringToDate(startDate);
+		this.endDate = Parser.parseStringToDate(endDate);
+		this.isPublic = isPublic;
+	}
 }

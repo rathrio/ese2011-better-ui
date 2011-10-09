@@ -4,6 +4,25 @@
 
 <body>
 <div id=wrapper>
+	<div id=navigation>
+		<ul>
+	    <li><a href="@{Application.index()}">Home</a></li> 
+	    <li><a href="#">My Calendars</a> 
+	      <ul> 
+	        #{list items:cals, as:'cal'}
+				<li><a href="@{Application.displayEvents(user.name, cal.name)}">${cal.name} Calendar</a></li>
+			#{/list} 
+	      </ul> 
+	    </li> 
+	    <li><a href="#">Other Users</a> 
+		   	<ul>
+		    	#{list items:users, as:'otherUser'}
+					<li><a href="@{Application.displayCalendars(otherUser.name)}">${otherUser.name}</a></li>
+				#{/list}
+		    </ul> 
+	    </li> 
+	  	</ul>
+	</div>
 	<div id=userBox>
 		<div id=displayEvents>
 			#{if isConnected}
@@ -14,7 +33,20 @@
 			#{/else}
 			#{list events, as:'event'}
 				<li>
-				${event.name} </br> FROM: ${event.startDate.format('dd.MM.yy HH:mm')} TO: ${event.endDate.format('dd.MM.yy HH:mm')}
+				${event.name}
+				#{if event.isPublic}
+				(public)
+				#{/if}
+				#{else}
+				(private)
+				#{/else}
+				</br>
+				FROM: ${event.startDate.format('dd.MM.yy HH:mm')} TO: ${event.endDate.format('dd.MM.yy HH:mm')} <br>
+				#{if isConnected}
+				<a href="@{Application.displayEditPage(event.name, cal.name)}">edit</a>
+				 | 
+				<a href="@{Application.deleteEvent(event.name, cal.name)}">delete</a>
+				#{/if}
 				</li>
 				<br/>
 			#{/list}
@@ -25,11 +57,11 @@
 			<h2>Create a new Event</h2>
 			#{form @Application.createEvent()}
 				<p>
-		    		<input type="hidden" name="calendarName" value="${cal.name}" />
+		    		<input type="hidden" name="calendarname" value="${cal.name}" />
 		    	</p>
 				<p>
-					<label for="eventName">Event Name: </label> <br/>
-					<input type="text" name="eventName"/>
+					<label for="eventname">Event Name: </label> <br/>
+					<input type="text" name="eventname"/>
 				</p>
 				<p>
 					<label for="startDate">Start Date (dd.MM.yy HH:mm): </label> <br/>
@@ -51,16 +83,18 @@
 		#{/if}
 	</div>
 	
-	<div id=back>
-	#{if isConnected}
-	 	<a href="@{Application.index()}"><<</a>
-	#{/if}
-	#{else}
-		<a href="@{Application.displayCalendars(user.name)}"><<</a>
-	#{/else}
-	</div>
-	<div id=logout>
-	<a href="@{Secure.logout()}">logout</a>
+	<div id=logout_back>
+		<div id=logout>
+		<a href="@{Secure.logout()}">logout</a>
+		</div>
+		<div id=back>
+		#{if isConnected}
+		 	<a href="@{Application.index()}"><<</a>
+		#{/if}
+		#{else}
+			<a href="@{Application.displayCalendars(user.name)}"><<</a>
+		#{/else}
+		</div>
 	</div>
 </div>
 </body>

@@ -4,6 +4,25 @@
 
 <body>
 <div id=wrapper>
+	<div id=navigation>
+		<ul>
+	    <li><a href="@{Application.index()}">Home</a></li> 
+	    <li><a href="#">My Calendars</a> 
+	      <ul> 
+	        #{list items:cals, as:'cal'}
+				<li><a href="@{Application.displayEvents(user.name, cal.name)}">${cal.name} Calendar</a></li>
+			#{/list} 
+	      </ul> 
+	    </li> 
+	    <li><a href="#">Other Users</a> 
+		   	<ul>
+		    	#{list items:users, as:'otherUser'}
+					<li><a href="@{Application.displayCalendars(otherUser.name)}">${otherUser.name}</a></li>
+				#{/list}
+		    </ul> 
+	    </li> 
+	  	</ul>
+	</div>
 	<div id=userBox>
 		<div id=displayCalendars>
 		<h2>${user.name}'s Calendars </h2>
@@ -15,12 +34,13 @@
 		</div>
 	</div>
 	
-	<div id=back>
-	<a href="@{Application.index}"><<</a>
-	</div>
-	
-	<div id=logout>
-	<a href="@{Secure.logout()}">logout</a>
+	<div id=logout_back>
+		<div id=logout>
+		<a href="@{Secure.logout()}">logout</a>
+		</div>
+		<div id=back>
+		<a href="@{Application.index}"><<</a>
+		</div>
 	</div>
 </div>
 </body>

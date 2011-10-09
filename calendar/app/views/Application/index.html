@@ -2,27 +2,46 @@
 #{set title:'Home' /}
 
 <head>
-<link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/main.css'}" />
 </head>
-
 <body>
+
 <div id=wrapper>
+	<div id=navigation>
+		<ul>
+	    <li><a href="@{Application.index()}">Home</a></li> 
+	    <li><a href="#">My Calendars</a> 
+	      <ul> 
+	        #{list items:cals, as:'calendar'}
+				<li><a href="@{Application.displayEvents(user.name, calendar.name)}">${calendar.name} Calendar</a></li>
+			#{/list} 
+	      </ul> 
+	    </li> 
+	    <li><a href="#">Other Users</a> 
+		   	<ul>
+		    	#{list items:users, as:'otherUser'}
+					<li><a href="@{Application.displayCalendars(otherUser.name)}">${otherUser.name}</a></li>
+				#{/list}
+		    </ul> 
+	    </li> 
+	  </ul>
+	</div>
+	
 	<div id=userBox>
 		<div id=displayCalendars>
 		<h2>Your Calendars</h2>
-		#{list items:cals, as:'cal'}
-			<p>
-			<a href="@{Application.displayEvents(user.name, cal.name)}">${cal.name} Calendar</a>
-			</p>
-		#{/list}
+		  	#{list items:cals, as:'cal'}
+				<p>
+					<a href="@{Application.displayEvents(user.name, cal.name)}">${cal.name} Calendar</a>
+				</p>
+			#{/list}
 		</div>
 		
 		<div id=createCalendar>
 		<h2>Create a new Calendar</h2>
 			#{form @Application.createCalendar()}
 				<p>
-					<label for="calendarName">Calendar Name: </label> <br/>
-					<input type="text" name="calendarName"/>
+					<label for="calendarname">Calendar Name: </label> <br/>
+					<input type="text" name="calendarname"/>
 					<input type="submit" value="create Calendar">
 				</p>
 			#{/form}
@@ -30,16 +49,17 @@
 	</div>
 	
 	<div id=otherUsers>
-	<h2>Other users</h2>
-	#{list items:users, as:'user'}
-		<p>
-			<a href="@{Application.displayCalendars(user.name)}">${user.name}</a> 
-		</p>
-	#{/list}
+		<h2>Other users</h2>
+		#{list items:users, as:'user'}
+			<p>
+				<a href="@{Application.displayCalendars(user.name)}">${user.name}</a> 
+			</p>
+		#{/list}
 	</div>
-	
-	<div id=logout>
-	<a href="@{Secure.logout()}">logout</a>
+	<div id=logout_back>
+		<div id=logout>
+			<a href="@{Secure.logout()}">logout</a>
+		</div>
 	</div>
 </div>
 </body>

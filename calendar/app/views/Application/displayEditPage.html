@@ -1,0 +1,68 @@
+<head>
+<link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/main.css'}" />
+</head>
+<body>
+
+<div id=wrapper>
+	<div id=navigation>
+		<ul>
+	    <li><a href="@{Application.index()}">Home</a></li> 
+	    <li><a href="#">My Calendars</a> 
+	      <ul> 
+	        #{list items:cals, as:'calendar'}
+				<li><a href="@{Application.displayEvents(user.name, calendar.name)}">${calendar.name} Calendar</a></li>
+			#{/list} 
+	      </ul> 
+	    </li> 
+	    <li><a href="#">Other Users</a> 
+		   	<ul>
+		    	#{list items:users, as:'otherUser'}
+					<li><a href="@{Application.displayCalendars(otherUser.name)}">${otherUser.name}</a></li>
+				#{/list}
+		    </ul> 
+	    </li> 
+	  	</ul>
+	</div>
+	<div id=userBox>
+		<div id=displayEvents>
+			<h2>Edit Event: ${event.name}</h2>
+			#{form @Application.editEvent()}
+				<p>
+		    		<input type="hidden" name="calendarname" value="${cal.name}"/>
+		    	</p>
+		    	<p>
+		    		<input type="hidden" name="oldEventname" value="${event.name}"/>
+		    	</p>
+				<p>
+					<input type="text" name="newEventname" value="${event.name}"/>
+				</p>
+				<p>
+					<input type="text" name="startDate" value="${event.startDate.format('dd.MM.yy HH:mm')}"/>
+				</p>
+				<p>
+					<input type="text" name="endDate" value = "${event.endDate.format('dd.MM.yy HH:mm')}"/>
+				</p>
+				<p>
+					<input type="checkbox" name="isPublic" #{if event.isPublic} checked #{/if}/>
+					<label for="isPublic">Make public</label>
+				</p>
+				<p>
+					<input type="submit" value="edit Event">
+				</p>
+			#{/form}
+		</div>
+	</div>
+	
+	<div id=logout_back>
+		<div id=logout>
+		<a href="@{Secure.logout()}">logout</a>
+		</div>
+		<div id=back>
+			<a href="@{Application.displayEvents(user.name, cal.name)}"><<</a>
+		</div>
+	</div>
+	
+</div>
+
+
+</body>

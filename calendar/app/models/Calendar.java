@@ -81,17 +81,40 @@ public class Calendar implements Iterable<Event> {
 		return iterableEvents.iterator();
 	}
 
-	public void createEvent(String eventName, String startDate, String endDate, boolean isPublic) {
+	public void createEvent(String eventname, String startDate, String endDate, boolean isPublic) {
 		Date sDate = Parser.parseStringToDate(startDate);
     	Date eDate = Parser.parseStringToDate(endDate);
     	if (sDate != null && eDate != null) {
-    		if (eventName.trim().length() > 0){
+    		if (eventname.trim().length() > 0){
         		if (sDate.before(eDate)) {
-        			Event newEvent = new Event(eventName, sDate, eDate, isPublic);
+        			Event newEvent = new Event(eventname, sDate, eDate, isPublic);
                 	this.addEvent(newEvent);
             	}
         	}
     	}
+	}
+
+	public void deleteEventNamed(String eventname) {
+		for (Event event : new ArrayList<Event>(this.events)) {
+			if (eventname.equals(event.getName())) {
+				this.events.remove(event);
+				this.publicEvents.remove(event);
+			}
+		}
+	}
+	
+	public Event getEventNamed(String eventname) {
+		for (Event event : this.events) {
+			if (eventname.equals(event.getName())) {
+				return event;
+			}
+		}
+		throw new NoSuchEventException(eventname);
+	}
+
+	public void editEvent(String eventName) {
+		
+		
 	}
 	
 }
