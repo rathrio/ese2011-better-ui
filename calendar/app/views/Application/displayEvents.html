@@ -55,6 +55,9 @@
 		#{if isConnected}
 			<div id=createEvents>
 			<h2>Create a new Event</h2>
+			#{if message}
+				<p id =errorMessage>${message}</p>
+			#{/if}
 			#{form @Application.createEvent()}
 				<p>
 		    		<input type="hidden" name="calendarname" value="${cal.name}" />

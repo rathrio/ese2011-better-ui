@@ -26,6 +26,9 @@
 	<div id=userBox>
 		<div id=displayEvents>
 			<h2>Edit Event: ${event.name}</h2>
+			#{if message}
+				<p id =errorMessage>${message}</p>
+			#{/if}
 			#{form @Application.editEvent()}
 				<p>
 		    		<input type="hidden" name="calendarname" value="${cal.name}"/>

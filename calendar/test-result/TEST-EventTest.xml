@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<testsuite failures="0" time="0.009" errors="0" skipped="0" tests="9" name="EventTest">
-  <testcase classname="EventTest" name="shouldBeNamedCorrectly" time="0.003">
+<testsuite failures="0" time="0.006" errors="0" skipped="0" tests="9" name="EventTest">
+  <testcase classname="EventTest" name="shouldBeNamedCorrectly" time="0.002">
       </testcase>
   <testcase classname="EventTest" name="shouldHaveStartAndEndDate" time="0">
       </testcase>
   <testcase classname="EventTest" name="shouldChangeVisibility" time="0">
       </testcase>
-  <testcase classname="EventTest" name="shouldBeComparable" time="0.001">
+  <testcase classname="EventTest" name="shouldBeComparable" time="0">
       </testcase>
   <testcase classname="EventTest" name="shouldGetStartAndEndDate" time="0">
       </testcase>
@@ -15,7 +15,7 @@
       </testcase>
   <testcase classname="EventTest" name="shouldHappenOnSpecificDateIfEventBeginsBeforeSpecifiedDay" time="0.001">
       </testcase>
-  <testcase classname="EventTest" name="shouldHappenOnSpecificDateAfterSpecifiedDay" time="0.001">
+  <testcase classname="EventTest" name="shouldHappenOnSpecificDateAfterSpecifiedDay" time="0">
       </testcase>
   <testcase classname="EventTest" name="shouldHappenOnSpecificDateIfEventSpansOverSpecifiedDay" time="0.002">
       </testcase>

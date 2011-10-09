@@ -111,10 +111,5 @@ public class Calendar implements Iterable<Event> {
 		}
 		throw new NoSuchEventException(eventname);
 	}
-
-	public void editEvent(String eventName) {
-		
-		
-	}
 	
 }

@@ -28,7 +28,7 @@ public class Application extends Controller {
     	render(user, cals);
     }
     
-    public static void displayEvents(String username, String calendarname) {
+    public static void displayEvents(String username, String calendarname, String message) {
     	User user = UserDatabase.getUserNamed(username);
     	Calendar cal = user.getCalNamed(calendarname);
     	User connectedUser = UserDatabase.getUserNamed(Security.connected());
@@ -38,7 +38,7 @@ public class Application extends Controller {
     		events.add(eventsIterator.next());
     	}
     	Boolean isConnected = isConnectedUser(username);
-    	render(user, cal, events, isConnected);
+    	render(user, cal, events, isConnected, message);
     }
     
     public static void createCalendar(String calendarname) {
@@ -49,38 +49,52 @@ public class Application extends Controller {
     
     public static void createEvent(String calendarname, String eventname, String startDate, 
     		String endDate, boolean isPublic) {
+    	String message = null;
     	User user = UserDatabase.getUserNamed(Security.connected());
     	Calendar cal = user.getCalNamed(calendarname);
+    	if (isInvalidInput(startDate, endDate)) {
+    		message = "Starting Date must not be later than ending Date";
+    	}
     	cal.createEvent(eventname, startDate, endDate, isPublic);
-    	displayEvents(user.getName(), calendarname);
+    	displayEvents(user.getName(), calendarname, message);
     }
     
-    public static void displayEditPage(String eventname, String calendarname) {
+    public static void displayEditPage(String eventname, String calendarname, String message) {
     	User user = UserDatabase.getUserNamed(Security.connected());
     	Calendar cal = user.getCalNamed(calendarname);
     	Event event = cal.getEventNamed(eventname);
-    	render(event, user, cal);
+    	render(event, user, cal, message);
     }
     
     public static void editEvent(String calendarname, String oldEventname, 
     		String newEventname, String startDate, String endDate, boolean isPublic) {
     	User user = UserDatabase.getUserNamed(Security.connected());
+    	String message = null;
     	Calendar cal = user.getCalNamed(calendarname);
     	Event event = cal.getEventNamed(oldEventname);
     	event.set(newEventname, startDate, endDate, isPublic);
-    	displayEvents(Security.connected(), calendarname);
+    	if (isInvalidInput(startDate, endDate)) {
+    		message = "please, be realistic. You are no neutrino!";
+    		displayEditPage(oldEventname, calendarname, message);
+    	}
+    	displayEvents(Security.connected(), calendarname, message);
     }
     
     public static void deleteEvent(String eventname, String calendarname) {
     	User user = UserDatabase.getUserNamed(Security.connected());
+    	String message = null;
     	Calendar cal = user.getCalNamed(calendarname);
     	cal.deleteEventNamed(eventname);
-    	displayEvents(Security.connected(), calendarname);
+    	displayEvents(Security.connected(), calendarname, message);
     }
     
     public static boolean isConnectedUser(String username) {
     	String connectedUsername = Security.connected();
     	return username.equals(connectedUsername);
+    }
+    
+    public static boolean isInvalidInput(String startDate, String endDate) {
+    	return Parser.parseStringToDate(startDate).after(Parser.parseStringToDate(endDate));
     }
     
 }

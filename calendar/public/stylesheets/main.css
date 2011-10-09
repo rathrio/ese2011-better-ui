@@ -135,6 +135,10 @@ body {
 	margin-bottom: 15px;
 }
 
+#errorMessage {
+	color: red;
+}
+
 #createEvents {
 	background: white;
 	border: 4px solid grey;

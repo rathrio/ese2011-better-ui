@@ -11,14 +11,14 @@
 	    <li><a href="@{Application.index()}">Home</a></li> 
 	    <li><a href="#">My Calendars</a> 
 	      <ul> 
-	        #{list items:cals, as:'calendar'}
+	        #{list cals, as:'calendar'}
 				<li><a href="@{Application.displayEvents(user.name, calendar.name)}">${calendar.name} Calendar</a></li>
 			#{/list} 
 	      </ul> 
 	    </li> 
 	    <li><a href="#">Other Users</a> 
 		   	<ul>
-		    	#{list items:users, as:'otherUser'}
+		    	#{list users, as:'otherUser'}
 					<li><a href="@{Application.displayCalendars(otherUser.name)}">${otherUser.name}</a></li>
 				#{/list}
 		    </ul> 

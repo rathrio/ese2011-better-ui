@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<testsuite failures="0" time="0.005" errors="0" skipped="0" tests="8" name="UserTest">
-  <testcase classname="UserTest" name="shouldHaveAName" time="0.001">
+<testsuite failures="0" time="0.007" errors="0" skipped="0" tests="8" name="UserTest">
+  <testcase classname="UserTest" name="shouldHaveAName" time="0">
       </testcase>
   <testcase classname="UserTest" name="shouldInitCalendar" time="0">
       </testcase>
   <testcase classname="UserTest" name="shouldParseDateCorrectly" time="0">
       </testcase>
-  <testcase classname="UserTest" name="shouldNotGetPrivateEvent" time="0">
+  <testcase classname="UserTest" name="shouldNotGetPrivateEvent" time="0.001">
       </testcase>
-  <testcase classname="UserTest" name="shouldGetPublicEvent" time="0">
+  <testcase classname="UserTest" name="shouldGetPublicEvent" time="0.001">
       </testcase>
-  <testcase classname="UserTest" name="shouldGetEventsOverMultipleDays" time="0.001">
+  <testcase classname="UserTest" name="shouldGetEventsOverMultipleDays" time="0.002">
       </testcase>
-  <testcase classname="UserTest" name="shouldNotGetEventOnOtherDate" time="0.002">
+  <testcase classname="UserTest" name="shouldNotGetEventOnOtherDate" time="0.001">
       </testcase>
-  <testcase classname="UserTest" name="shouldGetEventPartiallyMatchingDay" time="0.001">
+  <testcase classname="UserTest" name="shouldGetEventPartiallyMatchingDay" time="0.002">
       </testcase>
 </testsuite>
