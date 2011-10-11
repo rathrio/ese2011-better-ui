@@ -37,11 +37,11 @@ public class Bootstrap extends Job {
 	}
 
 	private void addSomeEventsToCals() {
-		Date startDate1 = Parser.parseStringToDate("22.11.11 14:00");
-		Date endDate1 = Parser.parseStringToDate("22.11.11 17:30");
+		Date startDate1 = Parser.parseStringToDate("22.10.11 14:00");
+		Date endDate1 = Parser.parseStringToDate("22.10.11 17:30");
 		Event event1 = new Event("Hunting with Dad", startDate1, endDate1, true);
-		Date startDate2 = Parser.parseStringToDate("14.12.11 11:00");
-		Date endDate2 = Parser.parseStringToDate("14.12.11 14:00");
+		Date startDate2 = Parser.parseStringToDate("14.10.11 11:00");
+		Date endDate2 = Parser.parseStringToDate("14.10.11 14:00");
 		Event event2 = new Event("Lunch with Mom", startDate2, endDate2, false);
 		for (Calendar c : cals) {
 			c.addEvent(event1);

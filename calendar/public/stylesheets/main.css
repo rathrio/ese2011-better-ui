@@ -117,16 +117,12 @@ body {
 	margin-left: 15px;
 }
 
-#calendar {
-	color: green;
-}
-
 #today {
 	color: red;
 }
 
-#dayHasEvent {
-	color: pink;
+#dayHasEvent {
+	color: blue;
 }
 
 #createCalendar {

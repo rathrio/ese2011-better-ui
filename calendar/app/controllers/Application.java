@@ -38,7 +38,6 @@ public class Application extends Controller {
     	Calendar calendar = user.getCalNamed(calendarname);
     	monthname = calendar.getMonthAsString(month);
     	days = calendar.getDaysOfMonth(month);
-    	System.out.println(days);
     	if (month < 1) {
     		month = 12;
     		year -= 1;

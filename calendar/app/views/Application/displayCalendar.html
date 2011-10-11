@@ -10,17 +10,12 @@
 			<a href="@{Application.displayCalendar(user.name, calendar.name, monthname, year, month+1, days)}">></a>
 			<div id=calendar>
 				#{list days, as:'day'}
-				#{if calendar.isToday(day)}
-				<div id=today>${day.format('dd')}</div>
+				
+				<div #{if calendar.isToday(day)} id=today #{/if}
+				#{if calendar.dayHasEvent(day)}
+				id=dayHasEvent
 				#{/if}
-				#{else}
-					#{if calendar.dayHasEvent(day)} 
-					<div id=dayHasEvent>${day.format('dd')}</div>
-					 #{/if}
-					 #{else}
-					<div id=day>${day.format('dd')}</div>
-					#{/else}
-					#{/else}
+				>${day.format('dd')}</div>
 				#{/list}
 			</div>
 		

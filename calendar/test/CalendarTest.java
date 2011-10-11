@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 
+import junit.extensions.TestDecorator;
+
 
 import models.*;
 
@@ -187,6 +189,14 @@ public class CalendarTest extends UnitTest {
 	public void shouldBeToday() {
 		firstStartDate = Parser.parseStringToDate("11.10.11 23:42");
 		assertTrue(cal.isToday(firstStartDate));
+	}
+	
+	@Test
+	public void shouldHaveEventOnTestDay() {
+		Date testDay = Parser.parseStringToDate("01.01.01 12:00");
+		Event testEvent = new Event("testEvent", firstStartDate, firstEndDate, true);
+		cal.addEvent(testEvent);
+		assertTrue(cal.dayHasEvent(testDay));
 	}
 	
 }
