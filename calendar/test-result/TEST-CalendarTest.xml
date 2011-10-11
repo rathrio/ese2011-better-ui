@@ -1,16 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<testsuite failures="0" time="0.009" errors="0" skipped="0" tests="6" name="CalendarTest">
+<testsuite failures="0" time="0.017" errors="0" skipped="0" tests="12" name="CalendarTest">
   <testcase classname="CalendarTest" name="shouldHaveNameHomeAndOwner" time="0.001">
       </testcase>
-  <testcase classname="CalendarTest" name="shouldAddEvent" time="0.001">
+  <testcase classname="CalendarTest" name="shouldAddEvent" time="0">
       </testcase>
   <testcase classname="CalendarTest" name="shouldAddSecondEventBeforeFirstEvent" time="0.002">
       </testcase>
   <testcase classname="CalendarTest" name="shouldGetIterator" time="0.002">
       </testcase>
-  <testcase classname="CalendarTest" name="shouldNotIterateOverSecondEvent" time="0.001">
+  <testcase classname="CalendarTest" name="shouldNotIterateOverSecondEvent" time="0.002">
       </testcase>
-  <testcase classname="CalendarTest" name="shouldGetIteratorOverEventsAfterSpecificDate" time="0.002">
+  <testcase classname="CalendarTest" name="shouldGetIteratorOverEventsAfterGivenDate" time="0.002">
+      </testcase>
+  <testcase classname="CalendarTest" name="shouldGetMonthAsTwoDigitInt" time="0.001">
+      </testcase>
+  <testcase classname="CalendarTest" name="shouldGetMonthAsString" time="0.001">
+      </testcase>
+  <testcase classname="CalendarTest" name="shouldGetMonthAsTwoDigitInteger" time="0.001">
+      </testcase>
+  <testcase classname="CalendarTest" name="shouldGetYearAsFourDigitInt" time="0">
+      </testcase>
+  <testcase classname="CalendarTest" name="shouldGetCorrectNumberOfDaysInAMonth" time="0.003">
+      </testcase>
+  <testcase classname="CalendarTest" name="shouldBeToday" time="0.002">
       </testcase>
 </testsuite>

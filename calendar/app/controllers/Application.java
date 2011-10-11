@@ -19,13 +19,35 @@ public class Application extends Controller {
     	User user = UserDatabase.getUserNamed(Security.connected());
     	ArrayList<Calendar> cals = user.getCalendars();
     	ArrayList<User> users = UserDatabase.getUsersExcept(user);
-        render(user, cals, users);
+    	Calendar cal = cals.get(0);
+    	int month = cal.getCurrentMonth();
+    	int year = cal.getCurrentYear();
+    	String monthname = cal.getMonthAsString(month);
+    	ArrayList<Date> days = cal.getDaysOfMonth(month);
+    	render(user, cals, users, monthname, year, month, days);
     }
     
     public static void displayCalendars(String username) {
     	User user = UserDatabase.getUserNamed(username);
     	ArrayList<Calendar> cals = user.getCalendars();
     	render(user, cals);
+    }
+    
+    public static void displayCalendar(String username, String calendarname, String monthname, int year, int month, ArrayList<Date> days) {
+    	User user = UserDatabase.getUserNamed(username);
+    	Calendar calendar = user.getCalNamed(calendarname);
+    	monthname = calendar.getMonthAsString(month);
+    	days = calendar.getDaysOfMonth(month);
+    	System.out.println(days);
+    	if (month < 1) {
+    		month = 12;
+    		year -= 1;
+    	}
+    	if (month > 12) {
+    		month = 1;
+    		year += 1;
+    	}
+    	render(user, calendar, monthname, year, month, days);
     }
     
     public static void displayEvents(String username, String calendarname, String message) {

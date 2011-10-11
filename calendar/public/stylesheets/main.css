@@ -107,6 +107,28 @@ body {
 	margin-bottom: 15px;
 }
 
+#displayCalendar {
+	background: white;
+	border: 4px solid grey;
+	min-width: 195px;
+	min-height: 382px;
+	padding: 20px;
+	float: left;
+	margin-left: 15px;
+}
+
+#calendar {
+	color: green;
+}
+
+#today {
+	color: red;
+}
+
+#dayHasEvent {
+	color: pink;
+}
+
 #createCalendar {
 	background: white;
 	border: 4px solid grey;

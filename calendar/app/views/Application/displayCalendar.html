@@ -1,0 +1,40 @@
+#{extends 'main.html' /}
+
+<body>
+<div id=wrapper>
+	
+	<div id=userBox>
+		<div id=displayCalendar>
+			<a href="@{Application.displayCalendar(user.name, calendar.name, monthname, year, month-1, days)}"><</a>
+			${monthname} ${year}
+			<a href="@{Application.displayCalendar(user.name, calendar.name, monthname, year, month+1, days)}">></a>
+			<div id=calendar>
+				#{list days, as:'day'}
+				#{if calendar.isToday(day)}
+				<div id=today>${day.format('dd')}</div>
+				#{/if}
+				#{else}
+					#{if calendar.dayHasEvent(day)} 
+					<div id=dayHasEvent>${day.format('dd')}</div>
+					 #{/if}
+					 #{else}
+					<div id=day>${day.format('dd')}</div>
+					#{/else}
+					#{/else}
+				#{/list}
+			</div>
+		
+		</div>
+	
+	</div>
+	<div id=logout_back>
+		<div id=logout>
+		<a href="@{Secure.logout()}">logout</a>
+		</div>
+		<div id=back>
+		<a href="@{Application.index}"><<</a>
+		</div>
+	</div>
+	
+</div>
+</body>

@@ -112,9 +112,99 @@ public class Calendar implements Iterable<Event> {
 		throw new NoSuchEventException(eventname);
 	}
 	
-	public String currentMonth() {
-		Date today = new Date();
-		return "hallo";
+	/**
+	 * @return the current month as a two-digit integer.
+	 */
+	public int getCurrentMonth() {
+		Date date = new Date();
+		return this.getMonthOf(date);
+	}
+	
+	/**
+	 * @param date
+	 * @return the month of a given date as a two-digit integer.
+	 */
+	public int getMonthOf(Date date) {
+		String month = Parser.parseDateToTwoDigitMonth(date);
+		return Integer.parseInt(month);
+	}
+	
+	/**
+	 * @return the current year as a four-digit integer.
+	 */
+	public int getCurrentYear() {
+		Date date = new Date();
+		return this.getYearOf(date);
+	}
+	
+	/**
+	 * @param date
+	 * @return the year of a given date as a four-digit integer.
+	 */
+	public int getYearOf(Date date) {
+		String year = Parser.parseDateToYear(date);
+		return Integer.parseInt(year);
+	}
+	
+	/**
+	 * @param month as a two-digit integer
+	 * @return the whole English name of a month from a two-digit month as a String.
+	 */
+	public String getMonthAsString(int month) {
+		String twoDigitMonth = month+"";
+		return Parser.parseTwoDigitMonthToMonthAsString(twoDigitMonth);
+	}
+	
+	/**
+	 * @param month as String, for example "February"
+	 * @return the month as a two-digit Integer.
+	 */
+	public int getMonthAsInt(String month) {
+		String twoDigitMonth = Parser.parseMonthAsStringToTwoDigitMonth(month);
+		return Integer.parseInt(twoDigitMonth);
+	}
+	
+	/**
+	 * @param month as a two-digit integer
+	 * @return all the days of a given month as an ArrayList of Integers.
+	 */
+	public ArrayList<Date> getDaysOfMonth(int month) {
+		ArrayList<Date> days = new ArrayList<Date>();
+		//Screw the leap year...
+		int i = 01;
+		int lastDay = 31;
+		if (month == 2) {
+			lastDay = 28;
+		}
+		if (month == 4 || month == 6 || month == 9 || month == 11) {
+			lastDay = 30;
+		}
+		while (i <= lastDay) {
+			String strI = i+"";
+			String strMonth = month+"";
+			Date day = Parser.parseStringToDate(strI + "." + strMonth + ".11 12:00");
+			days.add(day);
+			i++;
+		}
+		return days;
+	}
+	
+	public boolean isToday(Date day) {
+		Date date = new Date();
+		date = Parser.parseDateToTimeLessDate(date);
+		day = Parser.parseDateToTimeLessDate(day);
+		String strDate = Parser.parseDateToString(date);
+		String strDay = Parser.parseDateToString(day);
+		return strDate.equals(strDay);
+	}
+	
+	public boolean dayHasEvent(Date day) {
+		for (Event e : this.events) {
+			if (e.happensOn(day)) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 }

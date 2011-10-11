@@ -1,5 +1,6 @@
 
 
+
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
@@ -11,6 +12,8 @@ import models.*;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import com.mchange.util.AssertException;
 
 import play.test.UnitTest;
 
@@ -110,7 +113,7 @@ public class CalendarTest extends UnitTest {
 	}
 	
 	@Test
-	public void shouldGetIteratorOverEventsAfterSpecificDate() {
+	public void shouldGetIteratorOverEventsAfterGivenDate() {
 		firstStartDate = Parser.parseStringToDate("18.04.95 11:55");
 		firstEndDate = Parser.parseStringToDate("20.04.95 13:00");
 		Event firstEvent = new Event("firstEvent", firstStartDate, firstEndDate, true);
@@ -132,6 +135,58 @@ public class CalendarTest extends UnitTest {
 		Iterator<Event> eventsIterator = cal.getEventsAfter(otherUser, testDate);
 		assertEquals(secondEvent, eventsIterator.next());
 		assertEquals(thirdEvent, eventsIterator.next());
+	}
+	
+	@Test
+	public void shouldGetMonthAsTwoDigitInt() {
+		firstStartDate = Parser.parseStringToDate("23.01.11 17:00");
+		secondStartDate = Parser.parseStringToDate("24.11.12 23:00");
+		assertEquals(01, cal.getMonthOf(firstStartDate));
+		assertEquals(11, cal.getMonthOf(secondStartDate));
+	}
+	
+	@Test
+	public void shouldGetMonthAsString() {
+		assertEquals("January", cal.getMonthAsString(1));
+		assertEquals("February", cal.getMonthAsString(2));
+		assertEquals("March", cal.getMonthAsString(3));
+		assertEquals("April", cal.getMonthAsString(4));
+		assertEquals("May", cal.getMonthAsString(5));
+		assertEquals("June", cal.getMonthAsString(6));
+		assertEquals("July", cal.getMonthAsString(7));
+		assertEquals("August", cal.getMonthAsString(8));
+		assertEquals("September", cal.getMonthAsString(9));
+		assertEquals("October", cal.getMonthAsString(10));
+		assertEquals("November", cal.getMonthAsString(11));
+		assertEquals("December", cal.getMonthAsString(12));
+	}
+	
+	@Test
+	public void shouldGetMonthAsTwoDigitInteger() {
+		assertEquals(01, cal.getMonthAsInt("January"));
+		assertEquals(12, cal.getMonthAsInt("December"));
+	}
+	
+	@Test
+	public void shouldGetYearAsFourDigitInt() {
+		firstStartDate = Parser.parseStringToDate("24.01.95 17:00");
+		assertEquals(1995, cal.getYearOf(firstStartDate));
+	}
+	
+	@Test
+	public void shouldGetCorrectNumberOfDaysInAMonth() {
+		int month = 1;
+		ArrayList<Date> days = cal.getDaysOfMonth(month);
+		assertEquals(31, days.size());
+		Date lastDay = days.get(30);
+		String strDay = Parser.parseDateToDay(lastDay);
+		assertEquals("31", strDay);
+	}
+	
+	@Test(expected=AssertionError.class)
+	public void shouldBeToday() {
+		firstStartDate = Parser.parseStringToDate("11.10.11 23:42");
+		assertTrue(cal.isToday(firstStartDate));
 	}
 	
 }

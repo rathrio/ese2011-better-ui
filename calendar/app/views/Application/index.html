@@ -31,7 +31,7 @@
 		<h2>Your Calendars</h2>
 		  	#{list items:cals, as:'cal'}
 				<p>
-					<a href="@{Application.displayEvents(user.name, cal.name)}">${cal.name} Calendar</a>
+					<a href="@{Application.displayCalendar(user.name, cal.name, monthname, year, month, days)}">${cal.name} Calendar</a>
 				</p>
 			#{/list}
 		</div>
