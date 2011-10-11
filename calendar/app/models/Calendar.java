@@ -112,4 +112,9 @@ public class Calendar implements Iterable<Event> {
 		throw new NoSuchEventException(eventname);
 	}
 	
+	public String currentMonth() {
+		Date today = new Date();
+		return "hallo";
+	}
+	
 }
