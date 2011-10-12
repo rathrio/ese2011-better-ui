@@ -23,27 +23,14 @@ public class Event implements Comparable<Event> {
 	}
 	
 	public boolean happensOn(Date date) {
-		Date day = parseToDay(date);
-		Date startDay = parseToDay(startDate);
-		Date endDay = parseToDay(endDate);
+		Date day = Parser.parseDateToTimeLessDate(date);
+		Date startDay = Parser.parseDateToTimeLessDate(startDate);
+		Date endDay = Parser.parseDateToTimeLessDate(endDate);
 		return startDay.equals(day) 
 				|| endDay.equals(day) 
 				|| (startDay.before(day) && endDay.after(day));
 	}
 	
-	private Date parseToDay(Date date) {
-		SimpleDateFormat dayFormatter = new SimpleDateFormat("ddMMyy");
-		String strDate = dayFormatter.format(date);
-		Date dayDate = null;
-		try {
-			dayDate = dayFormatter.parse(strDate);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
-		assert (dayDate != null);
-		return dayDate;
-	}
-
 	@Override
 	public int compareTo(Event otherEvent) {
 		Date otherStartDate = otherEvent.getStartDate();

@@ -7,8 +7,8 @@
 	    <li><a href="@{Application.index()}">Home</a></li> 
 	    <li><a href="#">My Calendars</a> 
 	      <ul> 
-	        #{list items:cals, as:'cal'}
-				<li><a href="@{Application.displayEvents(user.name, cal.name)}">${cal.name} Calendar</a></li>
+	        #{list items:cals, as:'calendar'}
+				<li>${calendar.name} Calendar</li>
 			#{/list} 
 	      </ul> 
 	    </li> 
@@ -26,7 +26,7 @@
 		<h2>${user.name}'s Calendars </h2>
 		#{list cals, as:'cal'}
 			<li>
-			<a href="@{Application.displayEvents(user.name, cal.name)}">${cal.name} Calendar</a>
+			<a href="@{Application.displayCalendar(user.name, cal.name, monthname, year, month, days, activeDay)}">${cal.name} Calendar</a>
 			</li>
 		#{/list}
 		</div>
@@ -35,9 +35,6 @@
 	<div id=logout_back>
 		<div id=logout>
 		<a href="@{Secure.logout()}">logout</a>
-		</div>
-		<div id=back>
-		<a href="@{Application.index}"><<</a>
 		</div>
 	</div>
 </div>

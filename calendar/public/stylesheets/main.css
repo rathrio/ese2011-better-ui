@@ -118,11 +118,15 @@ body {
 }
 
 #today {
-	color: red;
+	background: grey;
 }
 
 #dayHasEvent {
-	color: blue;
+	background: red;
+}
+
+#activeDay {
+	border: thin dotted black;
 }
 
 #createCalendar {
@@ -157,13 +161,15 @@ body {
 	color: red;
 }
 
+#eventBox {
+	float:left;
+	margin-left:15px;
+}
+
 #createEvents {
 	background: white;
 	border: 4px solid grey;
 	padding: 20px;
-	top: 280px;
-	left: 20px;
-	clear: left;
 }
 
 #logout_back {

@@ -207,4 +207,12 @@ public class Calendar implements Iterable<Event> {
 		return false;
 	}
 	
+	public boolean dayIsActiveDay(Date day, Date activeDay) {
+		activeDay = Parser.parseDateToTimeLessDate(activeDay);
+		day = Parser.parseDateToTimeLessDate(day);
+		String strActiveDay = Parser.parseDateToString(activeDay);
+		String strDay = Parser.parseDateToString(day);
+		return strActiveDay.equals(strDay);
+	}
+	
 }

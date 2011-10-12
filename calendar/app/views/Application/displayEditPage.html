@@ -8,7 +8,7 @@
 	    <li><a href="#">My Calendars</a> 
 	      <ul> 
 	        #{list items:cals, as:'calendar'}
-				<li><a href="@{Application.displayEvents(user.name, calendar.name)}">${calendar.name} Calendar</a></li>
+				<li><a href="@{Application.displayCalendar(user.name, calendar.name, monthname, year, month, days, activeDay)}">${calendar.name} Calendar</a></li>
 			#{/list} 
 	      </ul> 
 	    </li> 
@@ -48,6 +48,21 @@
 					<label for="isPublic">Make public</label>
 				</p>
 				<p>
+		    		<input type="hidden" name="monthname" value="${monthname}"/>
+		    	</p>
+		    	<p>
+		    		<input type="hidden" name="year" value="${year}"/>
+		    	</p>
+		    	<p>
+		    		<input type="hidden" name="month" value="${month}"/>
+		    	</p>
+		    	<p>
+		    		<input type="hidden" name="days" value="${days}"/>
+		    	</p>
+		    	<p>
+		    		<input type="hidden" name="activeDay" value="${activeDay}"/>
+		    	</p>
+				<p>
 					<input type="submit" value="edit Event">
 				</p>
 			#{/form}
@@ -57,9 +72,6 @@
 	<div id=logout_back>
 		<div id=logout>
 		<a href="@{Secure.logout()}">logout</a>
-		</div>
-		<div id=back>
-			<a href="@{Application.displayEvents(user.name, cal.name)}"><<</a>
 		</div>
 	</div>
 	

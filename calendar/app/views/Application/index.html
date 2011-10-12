@@ -12,7 +12,7 @@
 	    <li><a href="#">My Calendars</a> 
 	      <ul> 
 	        #{list cals, as:'calendar'}
-				<li><a href="@{Application.displayEvents(user.name, calendar.name)}">${calendar.name} Calendar</a></li>
+				<li><a href="@{Application.displayCalendar(user.name, calendar.name, monthname, year, month, days, activeDay)}">${calendar.name} Calendar</a></li>
 			#{/list} 
 	      </ul> 
 	    </li> 
@@ -31,7 +31,7 @@
 		<h2>Your Calendars</h2>
 		  	#{list items:cals, as:'cal'}
 				<p>
-					<a href="@{Application.displayCalendar(user.name, cal.name, monthname, year, month, days)}">${cal.name} Calendar</a>
+					<a href="@{Application.displayCalendar(user.name, cal.name, monthname, year, month, days, activeDay)}">${cal.name} Calendar</a>
 				</p>
 			#{/list}
 		</div>
@@ -52,7 +52,7 @@
 		<h2>Other users</h2>
 		#{list items:users, as:'user'}
 			<p>
-				<a href="@{Application.displayCalendars(user.name)}">${user.name}</a> 
+				<a href="@{Application.displayCalendars(user.name, calendar.name, monthname, year, month, days, activeDay)}">${user.name}</a> 
 			</p>
 		#{/list}
 	</div>
